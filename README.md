@@ -27,3 +27,11 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
 })
 ```
 
+## 3、添加访问权限
+
+在这个类的方法ShiroConfig#shiroFilter()，添加下面配置
+```text
+        //activiti
+        filterChainDefinitionMap.put("/activiti/**", "anon");
+        filterChainDefinitionMap.put("/bpm/**/*", "anon");
+```
