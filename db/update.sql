@@ -112,3 +112,6 @@ CREATE TABLE `zh_leave_oa`  (
   `act_status` varchar(32)  NULL DEFAULT NULL COMMENT '审批流状态',
   PRIMARY KEY (`id`) USING BTREE
 ) ;
+
+alter table zh_leave_oa
+    add sys_org_code varchar(50) null comment '所属部门';

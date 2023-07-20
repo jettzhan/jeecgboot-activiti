@@ -31,7 +31,7 @@
         FROM
         (( SELECT * FROM `act_z_node` WHERE node_id = #{nodeId} AND proc_def_id = #{procDefId} AND type = 1 ) AS tb
         LEFT JOIN sys_user ON sys_user.username = tb.relate_id
-        )  WHERE sys_user.id IS NOT NULL
+        )  WHERE sys_user.id IS NOT NULL and sys_user.del_flag = 0
         UNION
         SELECT
         sys_user.*
@@ -40,15 +40,19 @@
         LEFT JOIN sys_role ON sys_role.role_code = tb.relate_id
         LEFT JOIN sys_user_role ON sys_user_role.role_id = sys_role.id
         LEFT JOIN sys_user ON sys_user.id = sys_user_role.user_id
-        ) WHERE sys_user.id IS NOT NULL
+        ) WHERE sys_user.id IS NOT NULL and sys_user.del_flag = 0
         UNION
         SELECT sys_user.* FROM (( SELECT * FROM `act_z_node` WHERE node_id = #{nodeId} AND proc_def_id = #{procDefId} AND type = 2 ) AS tb
         LEFT JOIN sys_depart ON sys_depart.id = tb.relate_id
         LEFT JOIN sys_user_depart ON sys_user_depart.dep_id = sys_depart.id
         LEFT JOIN sys_user ON sys_user.id = sys_user_depart.user_id
-        )
-        WHERE
-        sys_user.id IS NOT NULL;
+        ) WHERE sys_user.id IS NOT NULL AND sys_user.del_flag = 0
+        UNION
+        SELECT sys_user.* FROM (( SELECT relate_id FROM act_z_node WHERE node_id = #{nodeId} AND proc_def_id = #{procDefId} AND type = 5 ) AS tb
+        LEFT JOIN sys_depart ON sys_depart.id = tb.relate_id
+        LEFT JOIN sys_user ON sys_user.depart_ids = sys_depart.id
+        ) WHERE sys_user.id IS NOT NULL AND sys_user.del_flag = 0
+        ;
     </select>
 
 </mapper>

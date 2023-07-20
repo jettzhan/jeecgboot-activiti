@@ -35,6 +35,10 @@ public class ActNodeServiceImpl extends ServiceImpl<ActNodeMapper, ActNode>
   @Autowired private RuntimeService runtimeService;
   @Autowired private RepositoryService repositoryService;
 
+  public List<LoginUser> findUserByNodeIdAndPdefId(String nodeId, String procDefId) {
+    return this.baseMapper.findUserByNodeIdAndPdefId(nodeId, procDefId);
+  }
+
   public List<String> getRoleByUserName(String username) {
     return this.baseMapper.getRoleByUserName(username);
   }

@@ -5,6 +5,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Maps;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,9 +44,7 @@ import org.jeecg.modules.activiti.entity.ActBusiness;
 import org.jeecg.modules.activiti.entity.ActNode;
 import org.jeecg.modules.activiti.entity.ActZprocess;
 import org.jeecg.modules.activiti.entity.ActivitiConstant;
-import org.jeecg.modules.activiti.entity.Department;
 import org.jeecg.modules.activiti.entity.ProcessNodeVo;
-import org.jeecg.modules.activiti.entity.Role;
 import org.jeecg.modules.activiti.mapper.ActZprocessMapper;
 import org.jeecg.modules.activiti.service.IActZprocessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -241,27 +240,9 @@ public class ActZprocessServiceImpl extends ServiceImpl<ActZprocessMapper, ActZp
                 .eq(ActBusiness::getTableId, tableId)
                 .eq(ActBusiness::getTableName, tableName));
     String procDefId = business.getProcDefId();
-    // 直接选择人员
-    List<LoginUser> users = actNodeService.findUserByNodeId(nodeId, procDefId);
-    // 根据角色选择
-    List<Role> roles = actNodeService.findRoleByNodeId(nodeId, procDefId);
-    for (Role r : roles) {
-      List<LoginUser> userList = actNodeService.findUserByRoleId(r.getId());
-      users.addAll(userList);
-    }
-    // 部门
-    List<Department> departments = actNodeService.findDepartmentByNodeId(nodeId, procDefId);
-    for (Department d : departments) {
-      List<LoginUser> userList = actNodeService.findUserDepartmentId(d.getId());
-      users.addAll(userList);
-    }
-    // 部门负责人
-    List<Department> departmentManages =
-        actNodeService.findDepartmentManageByNodeId(nodeId, procDefId);
-    for (Department d : departmentManages) {
-      List<LoginUser> userList = actNodeService.findUserDepartmentManageId(d.getId());
-      users.addAll(userList);
-    }
+    List<LoginUser> users = new ArrayList<>();
+    // 直接人员，角色，部门，部门负责人
+    users.addAll(actNodeService.findUserByNodeIdAndPdefId(nodeId, procDefId));
     // 发起人部门负责人
     if (actNodeService.hasChooseDepHeader(nodeId, procDefId)) {
       List<LoginUser> allUser = actNodeService.queryAllUser();
