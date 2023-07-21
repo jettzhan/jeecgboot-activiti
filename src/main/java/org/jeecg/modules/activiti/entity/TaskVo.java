@@ -6,7 +6,6 @@ import java.util.Map;
 import lombok.Data;
 import org.activiti.engine.task.Task;
 
-/** @author pmc */
 @Data
 public class TaskVo {
 

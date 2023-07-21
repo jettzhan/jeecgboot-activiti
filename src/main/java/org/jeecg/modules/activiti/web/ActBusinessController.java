@@ -28,11 +28,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * @author PanMeiCheng
- * @date 2020-04-02
- * @version 1.0
- */
 @RestController
 @RequestMapping("/actBusiness")
 @Slf4j

@@ -52,7 +52,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-/** @Description: 流程定义扩展表 @Author: pmc @Date: 2020-03-22 @Version: V1.0 */
 @Service
 public class ActZprocessServiceImpl extends ServiceImpl<ActZprocessMapper, ActZprocess>
     implements IActZprocessService {

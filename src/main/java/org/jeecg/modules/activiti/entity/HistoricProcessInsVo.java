@@ -5,7 +5,6 @@ import java.util.Date;
 import lombok.Data;
 import org.activiti.engine.history.HistoricProcessInstance;
 
-/** @author pmc */
 @Data
 public class HistoricProcessInsVo {
 

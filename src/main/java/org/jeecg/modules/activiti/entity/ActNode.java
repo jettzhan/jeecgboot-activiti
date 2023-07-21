@@ -13,7 +13,6 @@ import lombok.experimental.Accessors;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
-/** @Description: 流程节点扩展表 @Author: jeecg-boot @Date: 2020-03-30 @Version: V1.0 */
 @Data
 @TableName("act_z_node")
 @EqualsAndHashCode(callSuper = false)

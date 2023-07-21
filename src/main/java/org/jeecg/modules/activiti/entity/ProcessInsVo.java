@@ -3,7 +3,6 @@ package org.jeecg.modules.activiti.entity;
 import lombok.Data;
 import org.activiti.engine.runtime.ProcessInstance;
 
-/** @author pmc */
 @Data
 public class ProcessInsVo {
 

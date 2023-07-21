@@ -9,7 +9,6 @@ import org.jeecg.modules.activiti.entity.ActNode;
 import org.jeecg.modules.activiti.entity.Department;
 import org.jeecg.modules.activiti.entity.Role;
 
-/** @Description: 流程节点扩展表 @Author: jeecg-boot @Date: 2020-03-30 @Version: V1.0 */
 public interface ActNodeMapper extends BaseMapper<ActNode> {
 
   List<LoginUser> findUserByNodeIdAndPdefId(

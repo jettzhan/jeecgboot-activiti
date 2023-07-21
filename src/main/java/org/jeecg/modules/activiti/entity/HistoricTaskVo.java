@@ -8,7 +8,6 @@ import java.util.Map;
 import lombok.Data;
 import org.activiti.engine.history.HistoricTaskInstance;
 
-/** @author pmc */
 @Data
 public class HistoricTaskVo {
 
