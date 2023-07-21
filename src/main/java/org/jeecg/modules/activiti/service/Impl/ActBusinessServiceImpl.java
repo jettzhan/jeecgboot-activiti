@@ -33,7 +33,6 @@ import org.jeecg.modules.activiti.service.IActBusinessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/** @Description: 流程业务扩展表 @Author: pmc @Date: 2020-03-30 @Version: V1.0 */
 @Service
 public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBusiness>
     implements IActBusinessService {

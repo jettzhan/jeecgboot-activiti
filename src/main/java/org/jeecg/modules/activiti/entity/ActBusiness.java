@@ -17,7 +17,6 @@ import lombok.experimental.Accessors;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.springframework.format.annotation.DateTimeFormat;
 
-/** @Description: 流程业务扩展表 @Author: pmc @Date: 2020-03-30 @Version: V1.0 */
 @Data
 @TableName("act_z_business")
 @EqualsAndHashCode(callSuper = false)

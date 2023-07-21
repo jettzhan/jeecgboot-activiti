@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.*;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.modules.activiti.entity.ActBusiness;
 
-/** @Description: 流程业务扩展表 @Author: pmc @Date: 2020-03-30 @Version: V1.0 */
 public interface ActBusinessMapper extends BaseMapper<ActBusiness> {
   @Select("select * from ${tableName} where id = #{tableId}")
   Map<String, Object> getBusiData(
