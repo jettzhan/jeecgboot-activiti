@@ -7,7 +7,11 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.activiti.engine.HistoryService;
@@ -18,6 +22,7 @@ import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.system.api.ISysBaseAPI;
 import org.jeecg.common.system.vo.ComboModel;
@@ -36,6 +41,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBusiness>
     implements IActBusinessService {
+
   @Autowired private TaskService taskService;
 
   @Autowired private ActZprocessServiceImpl actZprocessService;
@@ -143,6 +149,7 @@ public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBu
   public List<ActBusiness> findByProcDefId(String id) {
     return this.list(new LambdaQueryWrapper<ActBusiness>().eq(ActBusiness::getProcDefId, id));
   }
+
   /**
    * 保存业务表单数据到数据库表 <br>
    * 该方法相对通用，复杂业务单独定制，套路类似
@@ -208,8 +215,10 @@ public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBu
     Map<String, Object> busiData = this.getBusiData(tableId, tableName);
     Object createBy = busiData.get("createBy");
     if (createBy != null) {
-      String depName = sysBaseAPI.getDepartNamesByUsername(createBy.toString()).get(0);
-      busiData.put("createByDept", depName);
+      List<String> departName = sysBaseAPI.getDepartNamesByUsername(createBy.toString());
+      if (CollectionUtils.isNotEmpty(departName)) {
+        busiData.put("createByDept", departName.get(0));
+      }
       LoginUser userByName = sysBaseAPI.getUserByName(createBy.toString());
       busiData.put("createByName", userByName.getRealname());
       busiData.put("createByAvatar", userByName.getAvatar());
@@ -220,6 +229,7 @@ public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBu
   public void deleteBusiness(String tableName, String tableId) {
     this.baseMapper.deleteBusiData(tableId, tableName);
   }
+
   /** 通过类型和任务id查找用户id */
   public List<String> findUserIdByTypeAndTaskId(String type, String taskId) {
     return baseMapper.findUserIdByTypeAndTaskId(type, taskId);
@@ -233,6 +243,7 @@ public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBu
   public List<String> selectIRunIdentity(String taskId, String type) {
     return baseMapper.selectIRunIdentity(taskId, type);
   }
+
   /** 修改业务表的流程字段 */
   public void updateBusinessStatus(String tableName, String tableId, String actStatus) {
     try {
@@ -243,10 +254,13 @@ public class ActBusinessServiceImpl extends ServiceImpl<ActBusinessMapper, ActBu
       log.warn(e.getMessage());
     }
   }
+
   /** 获取业务表单数据并驼峰转换 */
   public Map<String, Object> getBusiData(String tableId, String tableName) {
     Map<String, Object> busiData = this.baseMapper.getBusiData(tableId, tableName);
-    if (busiData == null) return null;
+    if (busiData == null) {
+      return null;
+    }
     HashMap<String, Object> map = Maps.newHashMap();
     for (String key : busiData.keySet()) {
       String camelName = oConvertUtils.camelName(key);
