@@ -13,6 +13,17 @@
     <relativePath/>
   </parent>
 
+  <distributionManagement>
+    <repository>
+      <id>deploy-release</id>
+      <url>http://repo.noodb.com/repository/thingscan-release/</url>
+    </repository>
+    <snapshotRepository>
+      <id>deploy-snapshot</id>
+      <url>http://repo.noodb.com/repository/thingscan-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <repositories>
     <repository>
       <id>aliyun</id>
