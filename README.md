@@ -35,3 +35,34 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
         filterChainDefinitionMap.put("/activiti/**", "anon");
         filterChainDefinitionMap.put("/bpm/**/*", "anon");
 ```
+
+
+## 代码生成的form表单，页面接口，怎么结合审批流
+
+1、生成代码后，在src/views/activiti/mixins/activitiMixin.js 添加表单
+
+````text
+ allFormComponent:function(){
+      return [
+          {
+            text:'示例表单',
+            routeName:'@/views/activiti/form/demoForm',
+            component:() => import(`@/views/activiti/form/demoForm`),
+            businessTable:'test_demo'
+          },
+          {
+            text:'请假oa表单',
+            routeName:'@/views/activiti/form/leaveOaForm',
+            component:() => import(`@/views/activiti/form/leaveOaForm`),
+            businessTable:'zh_leave_oa'
+          },
+         {
+          text:'请假代码生成表单',
+          routeName:'@/views/leave/modules/ZhLeaveOaForm',
+          component:() => import(`@/views/leave/modules/ZhLeaveOaForm`),
+          businessTable:'zh_leave_oa'
+        }
+      ]
+````
+2、 将审批流和表单业务进行绑定。
+

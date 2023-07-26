@@ -1,6 +1,5 @@
 package org.jeecg.modules.activiti.web;
 
-import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -143,22 +142,7 @@ public class ActBusinessController {
     String tableId = actBusiness.getTableId();
     String tableName = actBusiness.getTableName();
     act.setTableId(tableId);
-    Map<String, Object> busiData = actBusinessService.getBusiData(tableId, tableName);
-
-    if (MapUtil.isNotEmpty(busiData) && busiData.get(ActivitiConstant.titleKey) != null) {
-      // 如果表单里有 标题  更新一下
-      actBusiness.setTitle(busiData.get(ActivitiConstant.titleKey) + "");
-    }
-
-    String processInstanceId = actZprocessService.startProcess(act);
-    actBusiness.setProcInstId(processInstanceId);
-    actBusiness.setStatus(ActivitiConstant.STATUS_DEALING);
-    actBusiness.setResult(ActivitiConstant.RESULT_DEALING);
-    actBusiness.setApplyTime(new Date());
-    actBusinessService.updateById(actBusiness);
-    // 修改业务表的流程字段
-    actBusinessService.updateBusinessStatus(
-        actBusiness.getTableName(), actBusiness.getTableId(), "启动");
+    actZprocessService.startProcessAndUpdateActBusiness(actBusiness);
     return Result.ok("操作成功");
   }
   /*撤回申请*/

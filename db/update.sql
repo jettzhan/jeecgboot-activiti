@@ -115,3 +115,6 @@ CREATE TABLE `zh_leave_oa`  (
 
 alter table zh_leave_oa
     add sys_org_code varchar(50) null comment '所属部门';
+
+alter table test_demo
+    add act_status varchar(50) null comment '审批状态';
