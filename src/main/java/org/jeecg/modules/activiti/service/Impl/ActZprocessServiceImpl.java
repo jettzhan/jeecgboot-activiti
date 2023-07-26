@@ -497,7 +497,7 @@ public class ActZprocessServiceImpl extends ServiceImpl<ActZprocessMapper, ActZp
     actBusinessService.updateById(actBusiness);
     // 修改业务表的流程字段
     actBusinessService.updateBusinessStatus(
-        actBusiness.getTableName(), actBusiness.getTableId(), "启动");
+        actBusiness.getTableName(), actBusiness.getTableId(), "已启动");
     return processInstanceId;
   }
 }
