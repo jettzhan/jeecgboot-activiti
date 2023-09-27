@@ -3,6 +3,8 @@ package org.jeecg.modules.activiti.web;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
+import java.util.Objects;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
@@ -18,9 +20,7 @@ import org.jeecg.modules.activiti.service.IActZprocessService;
 import org.jeecg.modules.activiti.support.BusinessSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/actCommon")
@@ -66,5 +66,16 @@ public class ActCommonController {
     actBusinessService.save(actBusiness);
     iActZprocessService.startProcessAndUpdateActBusiness(actBusiness);
     return Result.ok("已提交审批");
+  }
+
+  @AutoLog(value = "根据业务表和id-查找流程实例")
+  @ApiOperation(value = "根据业务表和id，查找流程实例", notes = "根据业务表和id，查找流程实例")
+  @GetMapping(value = "/pro")
+  public Result findProdInsIdByBusinessTable(@RequestParam String tableName,@RequestParam String tableId){
+    ActBusiness one = actBusinessService.lambdaQuery().eq(ActBusiness::getTableName, tableName).eq(ActBusiness::getTableId, tableId).one();
+    if(Objects.isNull(one)){
+      Result.error("没有找到流程实例");
+    }
+    return Result.ok(one);
   }
 }

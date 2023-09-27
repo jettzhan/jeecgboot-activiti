@@ -118,3 +118,7 @@ alter table zh_leave_oa
 
 alter table test_demo
     add act_status varchar(50) null comment '审批状态';
+
+
+ALTER TABLE act_z_business ADD CONSTRAINT act_z_business_UN UNIQUE KEY (table_name,table_id);
+
