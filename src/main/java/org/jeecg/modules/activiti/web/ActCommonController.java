@@ -15,6 +15,7 @@ import org.jeecg.modules.activiti.entity.ActivitiConstant;
 import org.jeecg.modules.activiti.entity.CommonApplyDTO;
 import org.jeecg.modules.activiti.service.IActBusinessService;
 import org.jeecg.modules.activiti.service.IActZprocessService;
+import org.jeecg.modules.activiti.support.BusinessSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,9 @@ public class ActCommonController {
   @Autowired IActZprocessService iActZprocessService;
 
   @Autowired IActBusinessService actBusinessService;
+
+  @Autowired
+  BusinessSupport businessSupport;
 
   // 通用审批接口
   @AutoLog(value = "流程-提交申请 启动流程")
@@ -49,7 +53,9 @@ public class ActCommonController {
     }
     ActZprocess actZprocess = list.get(0);
     ActBusiness actBusiness = new ActBusiness();
-    actBusiness.setTitle(actZprocess.getDescription());
+    //TODO 以后这个标题可以根据消息模版进行管理上，目前只是取业务表的name字段
+    String businessTitle = businessSupport.getBusinessTitle(commonApplyDTO.getTableName(), commonApplyDTO.getTableId());
+    actBusiness.setTitle(businessTitle);
     actBusiness.setProcDefId(actZprocess.getId());
     LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
     String username = sysUser.getUsername();
