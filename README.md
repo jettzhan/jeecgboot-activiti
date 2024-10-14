@@ -1,7 +1,14 @@
-# 与jeecg-boot整合方法
+
+# 介绍 
+
+  国内很多小公司都是基于低代码Jeecgboot做为基础框架来开发的项目，由于成本原因，无法使用商业版本的工作流模块，但是在开源论坛中，几乎没有很方便集成的工作流模块。 比如开源作者宁波阿成<https://gitee.com/nbacheng/nbcio-boot>集成flowable，来回馈开源社区。
+但对于历史项目（其中有已经存在很多业务代码），集成起来就有点麻烦。
 
 
-## 1、引入依赖
+
+## 与jeecg-boot整合方法
+
+### 1、引入依赖
 
 在jeecg-system-start的pom.xml引入依赖
 
@@ -13,7 +20,7 @@
 </dependency>
 ```
 
-## 2、配置启动类
+### 2、配置启动类
 
 在jeecg-system-start的启动类JeecgSystemApplication，添加下面配置
 
@@ -27,7 +34,7 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
 })
 ```
 
-## 3、添加访问权限
+### 3、添加访问权限
 
 在这个类的方法ShiroConfig#shiroFilter()，添加下面配置
 ```text
