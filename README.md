@@ -6,13 +6,14 @@
   本项目是基于<https://github.com/happy-panda/jeecg-boot-activiti> 二开的，主要想要节省工作量，替换默认（丑的不够现代化）流程设计器，加上利用activiti提供的事件，来优化通知和流程流转模块。
 
 
-![img.png](img.png)
+![img.png](doc/static/img.png)
 
-![img_1.png](img_1.png)
+![img_1.png](doc/static/img_1.png)
 
-![img_2.png](img_2.png)
+![img_2.png](doc/static/img_2.png)
 
-## 基于jeecgboot vue2 最后一个版本3.4.4。
+
+## 版本
 
 ```xml
   <properties>
@@ -36,6 +37,8 @@
   <version>3.4.4</version>
 </dependency>
 ```
+![img_4.png](doc/static/img_4.png)
+
 
 ### 2、配置启动类
 
@@ -50,6 +53,8 @@ org.springframework.boot.actuate.autoconfigure.security.servlet
 org.activiti.spring.boot.SecurityAutoConfiguration.class
 })
 ```
+![img_3.png](doc/static/img_3.png)
+
 
 ### 3、添加访问权限
 
@@ -59,6 +64,8 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
         filterChainDefinitionMap.put("/activiti/**", "anon");
         filterChainDefinitionMap.put("/bpm/**/*", "anon");
 ```
+
+![img_5.png](doc/static/img_5.png)
 
 
 ## 代码生成的form表单，页面接口，怎么结合审批流
