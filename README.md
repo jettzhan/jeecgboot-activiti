@@ -89,5 +89,8 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
 ## 文档
 
 [流程表单开发](./doc/流程表单开发.md)  
-[整合activiti表单.md](./doc/整合activiti流程.md)
+[整合activiti表单.md](./doc/整合activiti流程.md)  
+[工作流加签转办实现](./doc/activiti-加签转办实现.md)  
+[工作流并行会签实现](./doc/activiti-并行会签实现.md)  
+[工作流抄送任务实现](./doc/activiti-抄送任务实现.md)  
 
