@@ -82,8 +82,10 @@ org.activiti.spring.boot.SecurityAutoConfiguration.class
 
 ![img_5.png](doc/static/img_5.png)
 
+## 前端整合
+ 将activiti目录复制到前端工程views目录下即可
 
-
+![img.png](doc/static/img2024100711.png)
 ## 文档
 
 [流程表单开发](./doc/流程表单开发.md)  
