@@ -14,7 +14,7 @@ https://github.com/happy-panda/jeecg-boot-activiti
 集成成功!!!
 
 # 效果演示
-![](static/jeecg-activiti.gif)
+![](./static/jeecg-activiti.gif)
 # 适用范围
 jeecg-boot: 2.4.2 (https://gitee.com/jeecg/jeecg-boot/tree/v2.4.2/)
 
@@ -150,7 +150,7 @@ filterChainDefinitionMap.put("/jeecg-boot/diagram-viewer/**", "anon");
 filterChainDefinitionMap.put("/jeecg-boot/editor-app/**", "anon"); 
 ```
 # 成功演示
-![](static/jeecg-activiti.gif)
+![](./static/jeecg-activiti.gif)
 
 
 
