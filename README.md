@@ -4,7 +4,7 @@
   国内很多小公司都是基于低代码Jeecgboot做为基础框架来开发项目，由于成本原因，无法使用商业版本的工作流模块，但是在开源论坛中，几乎没有很方便集成的工作流模块。 比如开源作者宁波阿成<https://gitee.com/nbacheng/nbcio-boot>集成flowable，来回馈开源社区。
 但对于它侵入式太强，做了很多新开发的功能，导致历史项目（其中有已经存在很多业务代码），集成起来就有点麻烦。  
 
-  本项目是基于<https://github.com/happy-panda/jeecg-boot-activiti> 二开的，主要想要节省工作量，替换默认（丑的不够现代化）流程设计器，加上利用activiti提供的事件，来优化通知和流程流转模块。
+  本项目是基于<https://github.com/happy-panda/jeecg-boot-activiti> 二开的，主要想要节省工作量，替换默认（丑的不够现代化）流程设计器，加上利用activiti提供的事件，来优化通知和流程流转模块。如果要修改前端流程设计器，参考<https://github.com/jettzhan/bpmn-process-designer/tree/jeecgboot>。
 
 
 ![img.png](doc/static/img.png)
