@@ -43,6 +43,8 @@ db/update.sql
 
 ### 1、引入依赖
 
+**在添加依赖之前请把本工程mvn install 到本地仓库，否则在jeecgboot项目中提示依赖jeecg-boot-activiti找不到。**
+
 在jeecg-system-start的pom.xml引入依赖
 
 ```xml
